@@ -131,8 +131,44 @@ class App extends React.Component {
     return (<div># of calcs: {x}</div>)
   }
 
+  // Example 7 - Which expressions are equivalent to O(N), and why? //
+  
+  // O(N + P), where P < N/2 | YES | if P < N/2, we know that N is the dominant term. 
+  // O(2N)                   | YES | constants are dropped.
+  // O(N + logN)             | YES | O(N) dominates O(logN)
+  // O(N + M)                | NO  | Without more information, O(M) cannot be dropped. It could surpass O(N).
+  
+  
+  // Example 8 - 
+  
+  // Suppose you have an algorithm that takes in an array of strings.
+  // It sorts each string, then sorts the full array. What would the runtime be?
+  
+  // let s = length of longest string in array | let a = length of array 
+
+  // Sorting each string = O(s*log(s)) 
+  // We do this for every string and there are "a" strings, so we have: O(a*s*log(s))
+  // We need to now sort all strings. At worst, each string comparison takes O(s)
+  // and there are O(a*log(a)) comparisons. In total, full array sort will take
+  // O(a*s*log(a)) time. Together:
+  //                    O( a*s*log(s) ) + O( a*s*log(a) ) = O( a*s(log(s) + log(a)) )
+
+  example10 = (n) => {
+    let i = 2;
+    for (i = 2; i * i <= n; i++) {    // work being done within for loop is constant,
+      if (n % i == 0) {              // so runtime is limited by i² = n, or i = √n
+        return (                     // Runtime = O(√N)
+          <div>false</div>  
+        )
+      }
+    }
+    return (
+      <div>true</div>
+    )
+  }
 
   render() {
+    let n = 7
     return (
       <div className="text-box1">
         <div className="array1">
@@ -146,6 +182,9 @@ class App extends React.Component {
           </ul>
           <ul>
             Example 3: <i>O(N²)</i> {this.example3(array1)}
+          </ul>
+          <ul>
+            Example 10: <i>O(√N)</i> <b>{n}</b> {this.example10(n)}
           </ul>
         </div>        
         <div className="array2">
